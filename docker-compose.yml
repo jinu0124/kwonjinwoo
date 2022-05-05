@@ -24,8 +24,8 @@ services:
       - client
     volumes:
       - .nginx/conf.d:/etc/nginx/conf.d
-#      - .nginx/zerossl:/var/www/zerossl/.well-known/pki-validation
-#      - .nginx/cert:/cert
+      - .nginx/zerossl:/var/www/zerossl/.well-known/pki-validation
+      - .nginx/cert:/cert
     ports:
       - 80:80
 #      - 443:443
