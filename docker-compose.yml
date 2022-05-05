@@ -5,7 +5,7 @@ services:
     build:
       context: ./sktServer
       args:
-        DOMAIN: 13.125.3.108
+        DOMAIN: 52.79.220.127
     ports:
       - "8080:8080"
   client:
