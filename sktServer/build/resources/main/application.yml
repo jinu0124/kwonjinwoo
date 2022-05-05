@@ -1,0 +1,27 @@
+server:
+  port: 8080
+
+spring:
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/test?serverTimezone=Asia/Seoul
+    username: root
+    password: m11041103m!
+    hikari:
+      maximum-pool-size: 12
+  redis:
+    host: 127.0.0.1
+    port: 6379
+
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 30MB
+      max-request-size: 31MB
+
+mybatis:
+  config-location: classpath:/config/mybatis-config.xml
+
+
+# instagram api
+# id: 2119769111527249
+# key: d16e598d45c983d5b38b53fa4a05e4fb
