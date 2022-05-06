@@ -6,7 +6,7 @@
             
             <button class="button button1" @click="snsLogin('instagram')">Instagram Login</button>
 <div class="fb-login-button" data-width="" data-size="large" data-button-type="continue_with" data-layout="default" data-auto-logout-link="false" data-use-continue-as="false"></div>
-           
+          
         </div>
 
     </div>
@@ -17,6 +17,63 @@
 
 <script>
 import user from "../api/user"
+import FB from 'vue-facebook-login-component'
+import Vue from 'vue'
+
+const vue_fb = {}
+vue_fb.install = function install(Vue, options) {
+    (function(d, s, id){
+        var js, fjs = d.getElementsByTagName(s)[0]
+        if (d.getElementById(id)) {return}
+        js = d.createElement(s)
+        js.id = id
+        js.src = "//connect.facebook.net/en_US/sdk.js"
+        fjs.parentNode.insertBefore(js, fjs)
+        console.log('setting fb sdk')
+    }(document, 'script', 'facebook-jssdk'))
+
+    window.fbAsyncInit = function onSDKInit() {
+        window.FB.init(options)
+        window.FB.AppEvents.logPageView()
+        Vue.FB = FB
+        window.dispatchEvent(new Event('fb-sdk-ready'))
+    }
+    Vue.FB = undefined
+}
+
+Vue.use(vue_fb, {
+    appId: '1207720376635833',
+    xfbml: true,
+    cookie     : true,
+    version: 'v13.0'
+})
+
+// new Vue({
+//     created: function(){
+//         window.fbAsyncInit = function() {
+//             FB.init({
+//             appId      : '1207720376635833',
+//             cookie     : true,
+//             xfbml      : true,
+//             version    : '13.0'
+//             });
+            
+//             FB.AppEvents.logPageView();   
+            
+//             FB.getLoginStatus(function(response) {
+//                 this.statusChangeCallback(response);
+//             });
+//         }
+
+//         (function(d, s, id){
+//         var js, fjs = d.getElementsByTagName(s)[0];
+//         if (d.getElementById(id)) {return;}
+//         js = d.createElement(s); js.id = id;
+//         js.src = "https://connect.facebook.net/en_US/sdk.js";
+//         fjs.parentNode.insertBefore(js, fjs);
+//         }(document, 'script', 'facebook-jssdk'));
+//     }
+// });
 
 export default {
     name: 'Login',
@@ -24,6 +81,8 @@ export default {
         return{
 
         }
+    },
+    components:{
     },
     methods:{
         async snsLogin(select){
@@ -41,11 +100,6 @@ export default {
     },
     computed:{
 
-    },
-    mounted() {
-        FB.getLoginStatus(function(response) {
-            statusChangeCallback(response);
-        });
     },
 }
 </script>
