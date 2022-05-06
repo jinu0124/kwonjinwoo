@@ -5,13 +5,10 @@
             <button class="button button2" @click="snsLogin('facebook')">Facebook Login</button>
             
             <button class="button button1" @click="snsLogin('instagram')">Instagram Login</button>
-
-            <div class="fb-login-button" data-width="" data-size="large" data-button-type="continue_with" data-layout="default" data-auto-logout-link="false" data-use-continue-as="false"></div>
-
+<div class="fb-login-button" data-width="" data-size="large" data-button-type="continue_with" data-layout="default" data-auto-logout-link="false" data-use-continue-as="false"></div>
+           
         </div>
 
-        <div class="fb-login-button" data-max-rows="1" data-size="large" data-button-type="continue_with" data-show-faces="true" data-auto-logout-link="true" data-use-continue-as="true"></div>
-        <div id="fb-root"></div>
     </div>
     
 </template>
@@ -38,8 +35,18 @@ export default {
 
             }
         },
+        async statusChangeCallback(res){
+            console.log(res);
+        }
     },
+    computed:{
 
+    },
+    mounted() {
+        FB.getLoginStatus(function(response) {
+            statusChangeCallback(response);
+        });
+    },
 }
 </script>
 
